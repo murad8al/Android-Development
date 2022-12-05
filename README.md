@@ -1,7 +1,7 @@
 # Android-Development
  Android Development  Examples
  
- ![Alt text](https://mega.nz/file/zLhh1TDZ#SW8Nej_MgNX46S1vvq6JlqmrX8QKzA5gSS_WoQU-Gao)
+ ![Alt text](https://github.com/murad8al/GitHub-Images/blob/main/Letter%20s%20logo%20vector%20_%20Download%20on%20Freepik.jpg)
  
  [Android Development Key Terms](https://github.com/murad8al/Android-Development/blob/main/Examples/Android%20Development%20Key%20Terms.md)
 
