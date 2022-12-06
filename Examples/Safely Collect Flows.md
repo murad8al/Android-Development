@@ -1,6 +1,4 @@
-### [medium article]( https://link.medium.com/wBafxzJUqvb)
-This article is also available as a video
-### [the video](https://youtu.be/0lWyiW-uAuA)
+
 
 # How To Safely Collect Flows Lifecycle-Aware In Jetpack Compose — A New Approach
 
@@ -143,3 +141,7 @@ In this article, as a follow-up to one of my previous articles, we have once aga
 Additionally, this time we dived deeper and discussed what ignoring the life cycle means. We saw that the app still collects from our Flow when we use the ordinary  <Span style="background-color: #DCDCDC"> collectAsState() </span>   and that we can fix this issue using the new  <Span style="background-color: #DCDCDC">collectAsStateWithLifecycle() </span>   extension function from the  <Span style="background-color: #DCDCDC"> androidx.lifecycle</span>   library.
 
 That said if you previously used any custom extension or helper functions for collecting from a  <Span style="background-color: #DCDCDC">Flow </span>   or  <Span style="background-color: #DCDCDC">StateFlow </span>   you can now safely replace them with the official provided one.
+ 
+ ### [medium article]( https://link.medium.com/wBafxzJUqvb)
+This article is also available as a video
+### [the video](https://youtu.be/0lWyiW-uAuA)
