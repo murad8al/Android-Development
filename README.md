@@ -1,8 +1,8 @@
-# Android-Development
- Android Development  Examples
+
+ ### Android Development  Examples
  
  
- ### [Android Development Key Terms](https://github.com/murad8al/Android-Development/blob/main/Examples/Android%20Development%20Key%20Terms.md)
+[Android Development Key Terms](https://github.com/murad8al/Android-Development/blob/main/Examples/Android%20Development%20Key%20Terms.md)
 
 ---
 
@@ -10,14 +10,7 @@
 
 ---
 
-
----
-
 [Android Studio Helpful Tips](https://github.com/murad8al/Android-Development/blob/main/Examples/Android%20Studio%20Helpful%20Tips.md)
-
----
-
-
 
 ---
 
@@ -25,15 +18,7 @@
 
 ---
 
-
-
----
-
 [date](https://github.com/murad8al/Android-Development/blob/main/Examples/date.md)
-
----
-
-
 
 ---
 
@@ -41,15 +26,7 @@
 
 ---
 
-
-
----
-
 [JC dropdown menu](https://github.com/murad8al/Android-Development/blob/main/Examples/JC%20dropdown%20menu.md)
-
----
-
-
 
 ---
 
@@ -57,15 +34,7 @@
 
 ---
 
-
-
----
-
 [JC Modifiers](https://github.com/murad8al/Android-Development/blob/main/Examples/JC%20Modifiers.md)
-
----
-
-
 
 ---
 
@@ -73,15 +42,7 @@
 
 ---
 
-
-
----
-
 [JC Recyclerview](https://github.com/murad8al/Android-Development/blob/main/Examples/JC%20Recyclerview.md)
-
----
-
-
 
 ---
 
@@ -89,15 +50,7 @@
 
 ---
 
-
-
----
-
 [JC ViewModel Tutorial](https://github.com/murad8al/Android-Development/blob/main/Examples/JC%20ViewModel%20Tutorial.md)
-
----
-
-
 
 ---
 
@@ -105,14 +58,7 @@
 
 ---
 
-
----
-
 [Safely Collect Flows](https://github.com/murad8al/Android-Development/blob/main/Examples/Safely%20Collect%20Flows.md)
-
----
-
-
 
 ---
 
@@ -120,14 +66,7 @@
 
 ---
 
-
----
-
 [WiFi and Mobile data](https://github.com/murad8al/Android-Development/blob/main/Examples/WiFi%20and%20Mobile%20data.md)
-
----
-
-
 
 ---
 
