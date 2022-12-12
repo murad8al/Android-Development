@@ -3,6 +3,4 @@ This chapter will use the knowledge gained in the chapter entitled [Working with
 
 #### About the RoomDemo project
 The project created in this chapter is a rudimentary inventory app designed to store the names and quantities of products. When completed, the app will provide the ability to add, delete and search for database entries while also displaying a scrollable list of all products currently stored in the database. This product list will update automatically as database entries are added or deleted. Once completed, the app will appear as illustrated in Figure 43-1 below:
-
-
 ![Figure 43-1](https://github.com/murad8al/GitHub-Images/blob/main/Android-Development/Room%20Databases%20with%20Jetpack%20Compose/Figure%2043-1.jpeg)
