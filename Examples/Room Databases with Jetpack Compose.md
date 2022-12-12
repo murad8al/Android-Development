@@ -156,12 +156,7 @@ Figure 43-1
 Creating the RoomDemo project
 Launch Android Studio and create a new Empty Compose Activity project named RoomDemo, specifying com.example.roomdemo as the package name, and selecting a minimum API level of API 26: Android 8.0 (Oreo). Within the MainActivity.kt file, delete the Greeting function and add a new empty composable named ScreenSetup which, in turn, calls a function named MainScreen:
 
-@Composable fun ScreenSetup() {    
-     MainScreen()
-}
 
-@Composable fun MainScreen() {     
-}
 @Composable fun ScreenSetup() {    
      MainScreen()
 }
@@ -239,6 +234,8 @@ Table 43-1
 
 Add a class file for the entity by right-clicking on the app -> java -> com.example.roomdemo entry in the Project tool window and selecting the New -> Kotlin File/Class menu option. In the new class dialog, name the class Product, select the Class entry in the list and press the keyboard return key to generate the file. When the Product.kt file opens in the editor, modify it so that it reads as follows:
 
+```kotlin
+
 package com.example.roomdemo
  
 class Product {
@@ -258,7 +255,11 @@ class Product {
         this.quantity = quantity
     }
 }
-The class now has variables for the database table columns and matching getter and setter methods. Of course, this class does not become an entity until it has been annotated. With the class file still open in the editor, add annotations and corresponding import statements:
+T
+
+```
+
+he class now has variables for the database table columns and matching getter and setter methods. Of course, this class does not become an entity until it has been annotated. With the class file still open in the editor, add annotations and corresponding import statements:
 
  
 
@@ -266,6 +267,8 @@ The class now has variables for the database table columns and matching getter a
 Preview  Buy eBook  Buy Print
 
  
+```kotlin
+
 
 package com.example.roomdemo
  
@@ -294,33 +297,9 @@ class Product {
         this.quantity = quantity
     }
 }
-package com.example.roomdemo
- 
-import androidx.annotation.NonNull
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
- 
-@Entity(tableName = "products")
-class Product {
- 
-    @PrimaryKey(autoGenerate = true)
-    @NonNull
-    @ColumnInfo(name = "productId")
-    var id: Int = 0
- 
-    @ColumnInfo(name = "productName")
-    var productName: String = ""
-    var quantity: Int = 0
- 
-    constructor() {}
- 
-    constructor(productname: String, quantity: Int) {
-        this.id = id
-        this.productName = productname
-        this.quantity = quantity
-    }
-}
+
+```
+
 These annotations declare this as the entity for a table named products and assign column names for both the id and name variables. The id column is also configured to be the primary key and auto-generated. Since a primary key can never be null, the @NonNull annotation is also applied. Since it will not be necessary to reference the quantity column in SQL queries, a column name has not been assigned to the quantity variable.
 
 Creating the Data Access Object
@@ -331,6 +310,8 @@ Figure 43-2
 
 Click on OK to generate the new interface and, with the ProductDao.kt file loaded into the code editor, make the following changes:
 
+```kotlin
+
 package com.example.roomdemo
  
 import androidx.lifecycle.LiveData
@@ -375,6 +356,8 @@ interface ProductDao {
     @Query("SELECT * FROM products")
     fun getAllProducts(): LiveData<List<Product>>
 }
+
+```
 The DAO implements methods to insert, find and delete records from the products database. The insertion method is passed a Product entity object containing the data to be stored while the methods to find and delete records are passed a string containing the name of the product on which to operate. The getAllProducts() method returns a LiveData object containing all of the records within the database. This method will be used to keep the product list in the user interface layout synchronized with the database.
 
  
@@ -390,6 +373,7 @@ The last task before adding the repository to the project is to implement the Ro
 Once the file has been generated, modify it as follows using the steps outlined in the [Room Databases and Compose](https://www.answertopia.com/jetpack-compose/room-databases-and-jetpack-compose/) chapter:
 
 ```kotlin
+
 package com.example.roomdemo
  
 import android.content.Context
@@ -425,6 +409,7 @@ abstract fun productDao(): ProductDao
         }
     }
 }
+
 ```
 
 #### Adding the repository
@@ -435,6 +420,7 @@ The repository class will be responsible for interacting with the Room database 
 Remaining within the ProductRepository.kt file, make the following changes :
 
 ```kotlin
+
 package com.example.roomdemo
  
 import androidx.lifecycle.LiveData
@@ -445,6 +431,7 @@ class ProductRepository(private val productDao: ProductDao) {
  
     val searchResults = MutableLiveData<List<Product>>()
 }
+
 ```
 
 The above declares a MutableLiveData variable named searchResults into which the results of a search operation are stored whenever an asynchronous search task completes (later in the tutorial, an observer within the ViewModel will monitor this live data object). When an instance of the class is created, it will need to be passed a reference to a ProductDao object.
@@ -452,6 +439,7 @@ The above declares a MutableLiveData variable named searchResults into which the
 The repository class now needs to provide some methods that can be called by the ViewModel to initiate database operations. To avoid performing database operations on the main thread, the repository will make use of coroutines where necessary. As such, some additional libraries need to be added to the project before work on the repository class can continue. Start by editing the Gradle Scripts -> build.gradle (Module: RoomDemo.app) file to add the following lines to the dependencies section:
 
 ```kotlin
+
 dependencies {
 .
 .
@@ -460,6 +448,7 @@ dependencies {
 .
 .
 }
+
 ```
 
 After making the change, click on the Sync Now link at the top of the editor panel to commit the changes.
@@ -467,6 +456,7 @@ After making the change, click on the Sync Now link at the top of the editor pan
 With a reference to the DAO stored and the appropriate libraries added, the methods are ready to be added to the ProductRepository class file as follows:
 
 ```kotlin
+
 .
 .
     val searchResults = MutableLiveData<List<Product>>()
@@ -496,6 +486,7 @@ With a reference to the DAO stored and the appropriate libraries added, the meth
         }
 .
 .
+
 ```
 
 In the case of the find operation, the asyncFind() method makes use of a deferred value to return the search results to the findProduct() method. Because the findProduct() method needs access to the searchResults variable, the call to the asyncFind() method is dispatched to the main thread which, in turn, performs the database operation using the IO dispatcher.
@@ -504,6 +495,7 @@ One final task remains to complete the repository class. The LazyColumn which wi
 
 
 ```kotlin
+
 .
 .
 class ProductRepository(private val productDao: ProductDao) {
@@ -512,6 +504,7 @@ class ProductRepository(private val productDao: ProductDao) {
     val searchResults = MutableLiveData<List<Product>>()
 .
 .
+
 ```
 
 #### Adding the ViewModel
@@ -520,6 +513,7 @@ The ViewModel will be responsible for the creation of the database, DOA, and rep
 Start by editing the build.gradle (Module RoomDemo.app) file to add the view model lifecycle library:
 
 ```kotlin
+
 .
 .
 dependencies {
@@ -528,6 +522,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.1'
 .
 .
+
 ```
 
 Sync the project before adding a ViewModel class to the project by right-clicking on the app -> java -> com. example.roomdemo entry in the Project tool window and selecting the New -> Kotlin File/Class menu option. In the New Class dialog, name the class MainViewModel, select the Class entry in the list and press the keyboard return key to generate the file.
@@ -535,6 +530,7 @@ Sync the project before adding a ViewModel class to the project by right-clickin
 Within the MainViewModel.kt file, modify the class declaration to accept an application context instance together with some properties and an initializer block as outlined below. The application context, represented by the Android Context class, is used in application code to gain access to the application resources at runtime. In addition, a wide range of methods may be called on an application’s context to gather information and make changes to the application’s environment. In this case, the application context is required when creating a database and will be passed into the view model from within the activity later in the chapter:
 
 ```kotlin
+
 .
 .
 import android.app.Application
@@ -558,26 +554,32 @@ class MainViewModel(application: Application) : ViewModel() {
         searchResults = repository.searchResults
     }
 }
+
 ```
 
 The initializer block creates a database which is used to create a DAO instance. We then use the DAO to initialize the repository:
 
 ```kotlin
+
 val productDb = ProductRoomDatabase.getInstance(application)
 val productDao = productDb.productDao()
 repository = ProductRepository(productDao)
+
 ```
 
 Finally, the repository is used to store references to the search results and allProducts live data objects so that they can be converted to states later within the main activity:
 
 ```kotlin
+
 allProducts = repository.allProducts
 searchResults = repository.searchResults
+
 ```
 
 All that now remains within the ViewModel is to implement the methods that will be called from within the activity in response to button clicks. These need to be placed after the init block as follows:
 
 ```kotlin
+
 .
 .
 init {
@@ -598,12 +600,14 @@ fun deleteProduct(name: String) {
 }
 .
 .
+
 ```
 
 #### Designing the user interface
 With the database, DOA, repository, and ViewModel completed, we are now ready to design the user interface. Start by editing the MainActivity.kt file and adding three composables to be used as the input text fields, column rows, and column title:
 
 ```kotlin
+
 .
 .
 import androidx.compose.foundation.background
@@ -674,6 +678,7 @@ fun CustomTextField(
             fontSize = 30.sp)
     )
 }
+
 ```
 
 #### Writing a ViewModelProvider Factory class
@@ -682,6 +687,7 @@ The view model we have created in this chapter is slightly more complex than ear
 Within the MainActivity.kt file, add the following factory class at the end of the file after the last closing brace (}):
 
 ```kotlin
+
 .
 .
 import android.app.Application
@@ -734,6 +740,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
         }
     }
 }
+
 ```
 
 The added code begins by obtaining a reference to the current local view model store owner. After checking the owner is not null, the viewModel() function is called and passed the owner, an identifying string, and view model factory (to which is passed the Application reference). The view model returned by the viewModel() call is then passed to ScreenSetup.
@@ -741,6 +748,7 @@ The added code begins by obtaining a reference to the current local view model s
 Next, modify ScreenSetup to accept the ViewModel and use it to convert the allProducts and searchResults live data objects to state values initialized with empty lists. These states, together with the view model also need to be passed to the MainScreen composable:
 
 ```kotlin
+
 .
 .
 import androidx.compose.runtime.*
@@ -769,6 +777,7 @@ fun MainScreen(
 ) {
  
 }
+
 ```
 
 When creating the ViewModel instance above, note that we used the LocalContext object to obtain a reference to the application context and passed it to the view model so that it can be used when creating the database.
@@ -777,6 +786,7 @@ When creating the ViewModel instance above, note that we used the LocalContext o
 Within the MainScreen function, add some state and event handler declarations as follows:
 
 ```kotlin
+
 var productName by remember { mutableStateOf("") }
     var productQuantity by remember { mutableStateOf("") }
     var searching by remember { mutableStateOf(false) }
@@ -789,11 +799,13 @@ var productName by remember { mutableStateOf("") }
         productQuantity = text
     }
 }
+
 ```
 
 Continue modifying the MainScreen function to add a Column containing two CustomTextField composables and a Row containing four Button components as follows:
 
 ```kotlin
+
 .
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 .
@@ -869,11 +881,13 @@ fun MainScreen(
         }
     }
 }
+
 ```
 
 Finally, add a LazyColumn to the parent Column immediately after the row of Button components. This will display a single instance of the TitleRow followed by a ProductRow for each product. The searching state will be used to decide whether the list is to include all products or only those products that match the search criteria:
 
 ```kotlin
+
 .
 .
 import androidx.compose.foundation.lazy.LazyColumn
@@ -902,6 +916,7 @@ fun MainScreen(allProducts: List<Product>, searchResults: List<Product>, viewMod
         }
     }
 }
+
 ```
 
 #### Testing the RoomDemo app
