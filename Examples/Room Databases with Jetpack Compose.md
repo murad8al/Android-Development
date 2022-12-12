@@ -6,3 +6,15 @@ The project created in this chapter is a rudimentary inventory app designed to s
 
 
 ![Figure 43-1](https://github.com/murad8al/GitHub-Images/blob/main/Android-Development/Room%20Databases%20with%20Jetpack%20Compose/Figure%2043-1.jpeg)
+
+#### Creating the RoomDemo project
+Launch Android Studio and create a new Empty Compose Activity project named RoomDemo, specifying com.example.roomdemo as the package name, and selecting a minimum API level of API 26: Android 8.0 (Oreo). Within the MainActivity.kt file, delete the Greeting function and add a new empty composable named ScreenSetup which, in turn, calls a function named MainScreen:
+
+```kotlin
+@Composable fun ScreenSetup() {    
+     MainScreen()
+}
+
+@Composable fun MainScreen() {     
+}
+```
